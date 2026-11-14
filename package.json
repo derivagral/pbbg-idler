@@ -1,0 +1,31 @@
+{
+  "name": "pbbg-idler",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm run dev -w @idler/server\" \"npm run dev -w @idler/web\"",
+    "build": "npm run build -w @idler/web",
+    "start": "npm run start -w @idler/server",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test apps/server/test/*.test.ts",
+    "test:browser": "playwright test",
+    "check": "npm run typecheck && npm test && npm run build && npm run test:browser"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}
